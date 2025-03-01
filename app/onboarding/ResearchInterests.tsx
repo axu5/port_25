@@ -13,7 +13,7 @@ export default function ResearchInterests() {
       <Label>Current Interests</Label>
       {interests.map((interest, i) => (
         <div key={interest} className='flex flex-row gap-x-2'>
-          <Input defaultValue={interest} />
+          <Input defaultValue={interest} name='current-interests' />
           <Button
             variant='destructive'
             className='cursor-pointer'
@@ -25,6 +25,7 @@ export default function ResearchInterests() {
       <div className='flex flex-row gap-x-2'>
         <Input
           value={curVal}
+          name='current-interests'
           onChange={e => setCurVal(e.currentTarget.value)}
           placeholder='What are you interested in?'
         />

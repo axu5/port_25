@@ -4,10 +4,28 @@ import { Label } from "@/components/ui/label";
 import ResearchInterests from "./ResearchInterests";
 
 export default async function OnboardingPage() {
+  async function submit(data: FormData) {
+    "use server";
+    const name = data.get("name");
+    const googleScholar = data.get("name");
+    const position = data.get("name");
+    const currentInterests = data.getAll("current-interests");
+    const currentWork = data.get("name");
+    console.log(
+      name,
+      googleScholar,
+      position,
+      currentInterests,
+      currentWork
+    );
+  }
+
   return (
     <div className='flex flex-col gap-y-10'>
       <h1 className='font-semibold text-3xl'>Onboarding</h1>
-      <form className='flex flex-col gap-y-3 w-xl mx-auto'>
+      <form
+        className='flex flex-col gap-y-3 w-xl mx-auto'
+        action={submit}>
         <Label htmlFor='name'>Name</Label>
         <Input
           name='name'
