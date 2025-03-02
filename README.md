@@ -9,3 +9,25 @@ We were inspired by a story from Aalto University. Three research groups found t
 No more.
 
 Acamatch matches you with researchers with similar interests, relevant experience, and mutual problems. Save time by standing on the shoulders of giants.
+
+## Run Acamatch
+
+### Frontend
+
+```bash
+pnpm dev
+```
+
+### Database
+
+```bash
+cd python_api/docker
+docker-compose up
+```
+
+### Backend
+
+```bash
+cd python_api
+pip install -r requirements.txt
+```

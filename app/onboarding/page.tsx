@@ -2,22 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ResearchInterests from "./ResearchInterests";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { ProfileType } from "../ProfileType";
 
 export default async function OnboardingPage() {
   async function submit(data: FormData) {
     "use server";
-    const name = data.get("name");
-    const googleScholar = data.get("name");
-    const position = data.get("name");
-    const currentInterests = data.getAll("current-interests");
-    const currentWork = data.get("name");
-    console.log(
-      name,
-      googleScholar,
-      position,
-      currentInterests,
-      currentWork
-    );
+    const profile = {
+      name: data.get("name"),
+      scholar_url: data.get("google-scholar"),
+      position: data.get("position"),
+      currentInterests: data.getAll("current-interests"),
+      currentWork: data.get("current-work"),
+    };
+    const stringifiedProfile = JSON.stringify(profile);
+
+    await fetch("http://0.0.0.0:8000/process-author/", {
+      method: "POST",
+      body: stringifiedProfile,
+    });
+
+    const cookieStore = await cookies();
+    cookieStore.set("profile", stringifiedProfile);
+
+    redirect("/home");
   }
 
   return (
